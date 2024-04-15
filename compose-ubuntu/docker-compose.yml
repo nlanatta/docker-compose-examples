@@ -1,0 +1,7 @@
+version: "3"
+services:
+  ubuntu:
+    container_name: node
+    image: node
+    restart: on-failure
+    command: ["sleep","infinity"]
