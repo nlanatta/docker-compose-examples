@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  dependabot:
+    image: ghcr.io/dependabot/dependabot-core:latest
+    volumes:
+      - /Users/nlanatta/Documents/Projects/Salesforce/Heroku/runtime-dns-terraform:/home/dependabot/dependabot-update
+    entrypoint: [ "/usr/local/bin/dependabot-core" ]
+    command: [
+      "update",
+      "--config", "/home/dependabot/dependabot-update/.github/dependabot.yml"
+    ]

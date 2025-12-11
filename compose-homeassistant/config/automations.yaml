@@ -1,0 +1,121 @@
+- id: '1759761055491'
+  alias: Arm alarm
+  description: ''
+  triggers: []
+  conditions: []
+  actions: []
+  mode: single
+- id: '1759761165263'
+  alias: Arm alarm
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: 0
+    id: Arm disabled
+  conditions: []
+  actions:
+  - action: alarm_control_panel.alarm_arm_away
+    metadata: {}
+    data: {}
+    target:
+      device_id: f84ad5c78131e07a790a26b83df34675
+  mode: single
+- id: '1759761222992'
+  alias: Disarm alarm
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunrise
+    offset: 0
+  conditions: []
+  actions:
+  - action: alarm_control_panel.alarm_disarm
+    metadata: {}
+    data: {}
+  mode: single
+- id: '1759761288944'
+  alias: Disarm alarm
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunrise
+    offset: 0
+  conditions: []
+  actions:
+  - action: alarm_control_panel.alarm_disarm
+    metadata: {}
+    data: {}
+    target:
+      device_id: f84ad5c78131e07a790a26b83df34675
+  mode: single
+- id: '1759764535199'
+  alias: Sensor Light
+  description: ''
+  use_blueprint:
+    path: Blackshome/sensor-light.yaml
+- id: '1759765004050'
+  alias: Sun elevations / Lights ON/OFF
+  description: ''
+  use_blueprint:
+    path: Blackshome/smart-light.yaml
+    input:
+      include_entity_state: []
+      include_sun:
+      - sun_falling
+      - sun_rising
+- id: '1759796281859'
+  alias: Lights on/off by sunrise
+  description: ''
+  use_blueprint:
+    path: Blackshome/smart-light.yaml
+    input:
+      include_sun:
+      - sun_falling
+      - sun_rising
+- id: '1760050088438'
+  alias: Arm Alarm
+  description: ''
+  triggers:
+  - trigger: time
+    at:
+      entity_id: sensor.sun_next_dusk
+      offset: '3600'
+    weekday:
+    - sat
+    - fri
+    - thu
+    - wed
+    - tue
+    - mon
+    - sun
+  conditions: []
+  actions:
+  - action: alarm_control_panel.alarm_arm_away
+    metadata: {}
+    data: {}
+    target:
+      device_id: f84ad5c78131e07a790a26b83df34675
+  mode: single
+- id: '1760050148278'
+  alias: Disarm Alarm
+  description: ''
+  triggers:
+  - trigger: time
+    at: sensor.sun_next_rising
+    weekday:
+    - sat
+    - fri
+    - thu
+    - wed
+    - tue
+    - mon
+    - sun
+  conditions: []
+  actions:
+  - action: alarm_control_panel.alarm_disarm
+    metadata: {}
+    data: {}
+    target:
+      device_id: f84ad5c78131e07a790a26b83df34675
+  mode: single
